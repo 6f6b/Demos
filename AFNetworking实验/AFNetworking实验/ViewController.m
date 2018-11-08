@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+//#import "Reac"
 @interface ViewController ()
 
 @end
@@ -16,8 +16,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:nil];
-    //[manager ]
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:nil];
+    [manager POST:@"https://www.baidu.com" parameters:@{@"hello":@"liufeng"} progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+            [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+        }
+    }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+
 }
 
 

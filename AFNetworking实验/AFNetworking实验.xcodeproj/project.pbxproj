@@ -16,6 +16,7 @@
 		0314E1F82191CCAD003799C0 /* AFNetworking__Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314E1F72191CCAD003799C0 /* AFNetworking__Tests.m */; };
 		0314E2032191CCAD003799C0 /* AFNetworking__UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0314E2022191CCAD003799C0 /* AFNetworking__UITests.m */; };
 		0314E2122191D3E8003799C0 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0314E2112191D3E8003799C0 /* AFNetworking.framework */; };
+		6831A6FD21941A3000C72B4B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6831A6FC21941A3000C72B4B /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		0314E2112191D3E8003799C0 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1066486582D73687754A3590 /* Pods_AFNetworking__.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AFNetworking__.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D335962457C31C1649E04E8 /* Pods-AFNetworking实验.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFNetworking实验.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AFNetworking实验/Pods-AFNetworking实验.debug.xcconfig"; sourceTree = "<group>"; };
+		6831A6FC21941A3000C72B4B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		86E25A3DD184CBDD84C3923E /* Pods-AFNetworking实验.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFNetworking实验.release.xcconfig"; path = "Pods/Target Support Files/Pods-AFNetworking实验/Pods-AFNetworking实验.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6831A6FD21941A3000C72B4B /* SystemConfiguration.framework in Frameworks */,
 				0314E2122191D3E8003799C0 /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +148,7 @@
 		3DF266909AAF7F5EAE2CF8CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6831A6FC21941A3000C72B4B /* SystemConfiguration.framework */,
 				0314E2112191D3E8003799C0 /* AFNetworking.framework */,
 				1066486582D73687754A3590 /* Pods_AFNetworking__.framework */,
 			);

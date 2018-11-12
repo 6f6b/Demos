@@ -10,6 +10,7 @@
 #import "ChatMsgCell.h"
 #import "MessageModel.h"
 #import "ChatMsgFactory.h"
+#import "UITableView+scrollBottom.h"
 
 @interface MsgListController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -28,11 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataArray = [NSMutableArray new];
-//    self.tableViewHeightConstraint.constant =
+    self.tableViewHeightConstraint.constant = ScreenHeight-BottomHeight-self.barBottomHeightCostraint.constant;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [ChatMsgFactory registerChatMsgCellWith:self.tableView];
-    self.tableView.estimatedRowHeight = 0.0;
+    self.tableView.estimatedRowHeight = 100.0;
     [self initDataArray];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -43,7 +44,7 @@
 ///初始化一个聊天数组
 - (void)initDataArray{
     //聊天信息条数
-    int msgNum = 10;
+    int msgNum = 2;
     NSArray *words = @[@"hello",@"my",@"name",@"is",@"liufeng",@"whats",@"your",@"name",@"you",@"look",@"so",@"beautyful",@".",@"!",@"when",@"see",@"me",@"will",@"love",@"belive"];
     for (int i=0; i<msgNum; i++) {
         MessageModel *messageModel = [MessageModel new];
@@ -71,6 +72,9 @@
 
 - (void)reloadChatList{
     [self.tableView reloadData];
+//    [self.tableView layoutIfNeeded];
+    [self updateTableViewWith:self.barBottomHeightCostraint.constant > 0];
+    [self.tableView nim_scrollToBottom:NO];
 }
 
 - (CGFloat)totalHeightWith:(NSArray *)dataArray{
@@ -103,6 +107,27 @@
     messageModel.text = self.inputText.text;
     [self.dataArray addObject:messageModel];
     [self reloadChatList];
+}
+
+- (void)updateTableViewWith:(BOOL)isBarShow{
+    if (!isBarShow) {
+        self.tableViewTopConstriant.constant = 0;
+        return;
+    }
+    
+    CGFloat visiableHeight = ScreenHeight-self.barBottomConstraint.constant-self.barBottomHeightCostraint.constant;
+    CGFloat contentHeight = [self totalHeightWith:self.dataArray];
+    CGFloat topConstraint = 0;
+    if (contentHeight <= visiableHeight) {
+    }
+    if (contentHeight > visiableHeight && contentHeight <= self.tableViewHeightConstraint.constant) {
+        topConstraint = visiableHeight - contentHeight;
+    }
+    if (contentHeight > self.tableViewHeightConstraint.constant) {
+        topConstraint = visiableHeight - self.tableViewHeightConstraint.constant;
+    }
+    self.tableViewTopConstriant.constant = topConstraint;
+    
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
@@ -156,6 +181,7 @@
         //处理逻辑
         [UIView animateWithDuration:duration animations:^{
             self.barBottomConstraint.constant = begin.origin.y-end.origin.y;
+            [self updateTableViewWith:YES];
         }];
     }
     
@@ -173,6 +199,7 @@
     [UIView animateWithDuration:duration animations:^{
         //如果高度超过了本身高度，要让最后一个cell在底部
         self.barBottomConstraint.constant = 0;
+        [self updateTableViewWith:NO];
     }];
 }
 

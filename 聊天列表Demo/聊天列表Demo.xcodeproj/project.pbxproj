@@ -24,6 +24,7 @@
 		6831A70A21958D8900C72B4B /* RightChatMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6831A70821958D8900C72B4B /* RightChatMsgCell.xib */; };
 		6831A70D21958E0200C72B4B /* ChatMsgFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6831A70C21958E0200C72B4B /* ChatMsgFactory.m */; };
 		6831A71021958E8F00C72B4B /* ChatMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6831A70F21958E8F00C72B4B /* ChatMsgCell.m */; };
+		6831A71B219981BC00C72B4B /* UITableView+scrollBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = 6831A71A219981BC00C72B4B /* UITableView+scrollBottom.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,9 @@
 		6831A70C21958E0200C72B4B /* ChatMsgFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatMsgFactory.m; sourceTree = "<group>"; };
 		6831A70E21958E8F00C72B4B /* ChatMsgCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatMsgCell.h; sourceTree = "<group>"; };
 		6831A70F21958E8F00C72B4B /* ChatMsgCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatMsgCell.m; sourceTree = "<group>"; };
+		6831A71821997F8B00C72B4B /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		6831A719219981BC00C72B4B /* UITableView+scrollBottom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+scrollBottom.h"; sourceTree = "<group>"; };
+		6831A71A219981BC00C72B4B /* UITableView+scrollBottom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+scrollBottom.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,8 +129,11 @@
 		6831A6A221913BF900C72B4B /* 聊天列表Demo */ = {
 			isa = PBXGroup;
 			children = (
+				6831A71821997F8B00C72B4B /* PrefixHeader.pch */,
 				6831A6A321913BF900C72B4B /* AppDelegate.h */,
 				6831A6A421913BF900C72B4B /* AppDelegate.m */,
+				6831A719219981BC00C72B4B /* UITableView+scrollBottom.h */,
+				6831A71A219981BC00C72B4B /* UITableView+scrollBottom.m */,
 				6831A6A621913BF900C72B4B /* ViewController.h */,
 				6831A6A721913BF900C72B4B /* ViewController.m */,
 				6831A6FE21957DE600C72B4B /* MessageModel.h */,
@@ -313,6 +320,7 @@
 				6831A70421958D6900C72B4B /* LeftChatMsgCell.m in Sources */,
 				6831A70021957DE700C72B4B /* MessageModel.m in Sources */,
 				6831A71021958E8F00C72B4B /* ChatMsgCell.m in Sources */,
+				6831A71B219981BC00C72B4B /* UITableView+scrollBottom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREFIX_HEADER = "聊天列表Demo/PrefixHeader.pch";
 				INFOPLIST_FILE = "聊天列表Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -500,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREFIX_HEADER = "聊天列表Demo/PrefixHeader.pch";
 				INFOPLIST_FILE = "聊天列表Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

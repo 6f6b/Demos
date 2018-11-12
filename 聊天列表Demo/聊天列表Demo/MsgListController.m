@@ -15,8 +15,12 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITextField *inputText;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *barBottomHeightCostraint;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *barBottomConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstriant;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
+
 @end
 
 @implementation MsgListController
@@ -24,12 +28,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataArray = [NSMutableArray new];
-    [self initDataArray];
-
+//    self.tableViewHeightConstraint.constant =
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [ChatMsgFactory registerChatMsgCellWith:self.tableView];
-    self.tableView.estimatedRowHeight = 100;
+    self.tableView.estimatedRowHeight = 0.0;
+    [self initDataArray];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -66,11 +71,6 @@
 
 - (void)reloadChatList{
     [self.tableView reloadData];
-    CGFloat totalHeight = [self totalHeightWith:self.dataArray];
-    CGFloat tableViewHeight = self.tableView.frame.size.height;
-    self.tableView.contentOffset = CGPointMake(0, totalHeight-tableViewHeight);
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataArray.count-1 inSection:0];
-//    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:true];
 }
 
 - (CGFloat)totalHeightWith:(NSArray *)dataArray{
@@ -112,6 +112,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MessageModel *msg = self.dataArray[indexPath.row];
+    CGFloat height = [self cellHeightWith:msg];
+    return height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

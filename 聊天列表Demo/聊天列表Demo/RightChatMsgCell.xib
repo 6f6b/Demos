@@ -45,6 +45,13 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxH-JA-Rlj">
+                        <rect key="frame" x="0.0" y="179.5" width="399" height="1"/>
+                        <color key="backgroundColor" red="0.8980392157" green="0.0078431372550000003" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ha6-Uh-KEp"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
@@ -54,6 +61,9 @@
                     <constraint firstItem="pne-Ug-xZi" firstAttribute="top" secondItem="Of2-qy-nVR" secondAttribute="top" id="Bqg-9s-SKM"/>
                     <constraint firstAttribute="trailing" secondItem="Of2-qy-nVR" secondAttribute="trailing" constant="15" id="HgU-gs-iO0"/>
                     <constraint firstItem="Of2-qy-nVR" firstAttribute="leading" secondItem="pne-Ug-xZi" secondAttribute="trailing" constant="15" id="IrQ-bc-e9u"/>
+                    <constraint firstAttribute="bottom" secondItem="KxH-JA-Rlj" secondAttribute="bottom" id="JpE-ce-jt5"/>
+                    <constraint firstAttribute="trailing" secondItem="KxH-JA-Rlj" secondAttribute="trailing" id="YiP-ON-cmh"/>
+                    <constraint firstItem="KxH-JA-Rlj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jEZ-JT-aUT"/>
                     <constraint firstItem="pne-Ug-xZi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="80" id="zhR-b8-ENN"/>
                 </constraints>
             </tableViewCellContentView>

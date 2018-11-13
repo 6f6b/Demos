@@ -21,7 +21,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *barBottomConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstriant;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
-
+@property (nonatomic, assign) BOOL isShow;
 @end
 
 @implementation MsgListController
@@ -72,9 +72,7 @@
 
 - (void)reloadChatList{
     [self.tableView reloadData];
-//    [self.tableView layoutIfNeeded];
     [self updateTableViewWith:self.barBottomHeightCostraint.constant > 0];
-    [self.tableView nim_scrollToBottom:NO];
 }
 
 - (CGFloat)totalHeightWith:(NSArray *)dataArray{
@@ -112,21 +110,24 @@
 - (void)updateTableViewWith:(BOOL)isBarShow{
     if (!isBarShow) {
         self.tableViewTopConstriant.constant = 0;
+        self.tableViewHeightConstraint.constant = ScreenHeight-self.barBottomHeightCostraint.constant;
         return;
     }
-    
     CGFloat visiableHeight = ScreenHeight-self.barBottomConstraint.constant-self.barBottomHeightCostraint.constant;
-    CGFloat contentHeight = [self totalHeightWith:self.dataArray];
-    CGFloat topConstraint = 0;
-    if (contentHeight <= visiableHeight) {
-    }
-    if (contentHeight > visiableHeight && contentHeight <= self.tableViewHeightConstraint.constant) {
-        topConstraint = visiableHeight - contentHeight;
-    }
-    if (contentHeight > self.tableViewHeightConstraint.constant) {
-        topConstraint = visiableHeight - self.tableViewHeightConstraint.constant;
-    }
-    self.tableViewTopConstriant.constant = topConstraint;
+    self.tableViewHeightConstraint.constant = visiableHeight;
+    [self.tableView nim_scrollToBottom:NO];
+//    CGFloat contentHeight = [self totalHeightWith:self.dataArray];
+//    CGFloat topConstraint = 0;
+//    if (contentHeight <= visiableHeight) {
+//    }
+//    if (contentHeight > visiableHeight && contentHeight <= self.tableViewHeightConstraint.constant) {
+//        topConstraint = visiableHeight - contentHeight;
+//        //topConstraint = visiableHeight - self.tableViewHeightConstraint.constant;
+//    }
+//    if (contentHeight > self.tableViewHeightConstraint.constant) {
+//        topConstraint = visiableHeight - self.tableViewHeightConstraint.constant;
+//    }
+//    self.tableViewTopConstriant.constant = topConstraint;
     
 }
 
@@ -164,6 +165,9 @@
 #pragma mark - 键盘通知
 - (void)keyboardWillShow:(NSNotification *)note
 {
+    if (self.isShow) {
+        return;
+    }
     // 1.取出键盘的frame
     CGRect begin = [note.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     
@@ -174,10 +178,10 @@
     
     //3.输入框弹起后的Y
     CGFloat y_board = 0;
-    
     //4.处理键盘（包括第三方键盘）
     if(begin.size.height > 0 && (begin.origin.y - end.origin.y > 0)){
-        
+        NSLog(@"键盘弹出%f",begin.origin.y-end.origin.y);
+        self.isShow =YES;
         //处理逻辑
         [UIView animateWithDuration:duration animations:^{
             self.barBottomConstraint.constant = begin.origin.y-end.origin.y;
@@ -191,13 +195,14 @@
  *  键盘即将退出的时候调用
  */
 - (void)keyboardWillHide:(NSNotification *)note
-{
+{   self.isShow = NO;
     // 1.取出键盘弹出的时间
     CGFloat duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     // 2.执行动画
     [UIView animateWithDuration:duration animations:^{
         //如果高度超过了本身高度，要让最后一个cell在底部
+        [self.view layoutIfNeeded];
         self.barBottomConstraint.constant = 0;
         [self updateTableViewWith:NO];
     }];

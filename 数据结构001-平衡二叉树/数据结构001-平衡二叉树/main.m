@@ -19,15 +19,6 @@ typedef struct BiNode{
     struct BiNode *left_child,*right_child;
 }BiNode, *BiTree;
 
-int main(int argc, const char * argv[]) {
-    @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
-    }
-    return 0;
-}
-
-
 /**
  对以p为根的树进行左旋
  */
@@ -68,21 +59,20 @@ void LeftBalance(BiTree *T){
         case RH:
             switch (Lr->balance_factor) {
                 case LH:
-                    Lr->left_child->balance_factor = EH;
-                    (*T)->balance_factor = LH;
+                    L->balance_factor = EH;
+                    (*T)->balance_factor = RH;
                     break;
                 case EH:
-                    Lr->balance_factor = EH;
-                    (*T)->balance_factor = EH;
+                    L->balance_factor = (*T)->balance_factor = EH;
                     break;
                 case RH:
-                    Lr->balance_factor = EH;
-                    (*T)->balance_factor = LH;
+                    (*T)->balance_factor = EH;
+                    L->balance_factor = LH;
                     break;
                 default:
                     break;
             }
-            L->balance_factor = EH;
+            Lr->balance_factor = EH;
             //先对左子树左转
             L_Rotate(&L);
             //再对T右转
@@ -91,4 +81,144 @@ void LeftBalance(BiTree *T){
         default:
             break;
     }
+}
+
+void RightBalance(BiTree *T){
+    BiTree R = (*T)->right_child;
+    BiTree Rl = R->left_child;
+    switch (R->balance_factor) {
+        case LH:
+            switch (Rl->balance_factor) {
+                case LH:
+                    (*T)->balance_factor = EH;
+                    R->balance_factor = RH;
+                    break;
+                case EH:
+                    (*T)->balance_factor = EH;
+                    R->balance_factor = EH;
+                    break;
+                case RH:
+                    R->balance_factor = EH;
+                    (*T)->balance_factor = LH;
+                    break;
+                default:
+                    break;
+            }
+            Rl->balance_factor = EH;
+            R_Rotate(&R);
+            L_Rotate(*T);
+            break;
+        case EH:
+            
+            break;
+        case RH:
+            (*T)->balance_factor = R->balance_factor = EH;
+            L_Rotate(T);
+            break;
+        default:
+            break;
+    }
+}
+
+BOOL InsertAVL(BiTree *T,int e,BOOL *taller){
+    if (!*T) {
+        printf("插入:%d\n",e);
+        *T = (BiTree)malloc(sizeof(BiNode));
+        (*T)->data = e;
+        (*T)->left_child = NULL;
+        (*T)->right_child = NULL;
+        (*T)->balance_factor = EH;
+        *taller = true;
+    }else{
+        if (e < ((*T)->data)) {
+            if(!InsertAVL(&(*T)->left_child, e, taller)){
+                return false;
+            }
+            if (*taller) {//已插入T的左子树，且左子树长高
+                //检查T的平衡度
+                switch ((*T)->balance_factor) {
+                    case LH:
+                        LeftBalance(T);//原本左子树比右子树高，需要做左平衡处理
+                        *taller = false;
+                        break;
+                    case EH:
+                        (*T)->balance_factor = LH;//原本左右子树等高，现因左子树增高而增高
+                        *taller = true;
+                        break;
+                    case RH:
+                        (*T)->balance_factor = EH;
+                        *taller = false;//原本右子树比左子树高，现因左子树增高而等高
+                        break;
+                    default:
+                        break;
+                }
+                LeftBalance(T);
+            }
+        }
+        if (e == (*T)->data) {
+            *taller = false;
+            return false;
+        }
+        if (e>(*T)->data) {
+            if(!InsertAVL(&(*T)->right_child, e, taller)){
+                return false;
+            }
+            if (*taller) {
+                switch ((*T)->balance_factor) {
+                    case LH:
+                        (*T)->balance_factor = EH;//原本左子树比右子树高，现因右子树增高而等高
+                        *taller = false;
+                        break;
+                    case EH:
+                        (*T)->balance_factor = RH;
+                        *taller = true;
+                        break;
+                    case RH:
+                        RightBalance(T);
+                        *taller = false;    //原本右子树比左子树高，现因右子树继续增高而需要做右平衡操作
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+
+//遍历
+void scan(BiTree *T){
+    if (!(*T)) {
+        return;
+    }
+    printf("元素：%d\n",(*T)->data);
+    if ((*T)->left_child) {
+        printf("元素%d的左子树%d\n",(*T)->data,(*T)->left_child->data);
+    }else{
+        printf("元素%d的左子树为空\n",(*T)->data);
+    }
+    if ((*T)->right_child) {
+        printf("元素%d的右子树%d\n",(*T)->data,(*T)->right_child->data);
+    }else{
+        printf("元素%d的右子树为空\n",(*T)->data);
+
+    }
+    scan(&(*T)->left_child);
+    scan(&(*T)->right_child);
+}
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        // insert code here...
+        NSLog(@"Hello, World!");
+        int a[10] = {2,3,5,6,8,10,11,100,9,4};
+        BiTree T = NULL;
+        BOOL taller;
+        for (int i=0; i<10; i++) {
+            InsertAVL(&T, a[i], &taller);
+        }
+        scan(&T);
+    }
+    return 0;
 }

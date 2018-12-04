@@ -1,7 +1,0 @@
-platform:ios,'8.0'
-target 'PlayerTest' do
-
-pod 'AliyunPlayer_iOS/AliyunPlayerSDK'
-pod 'AliyunPlayer_iOS/AliyunVodPlayerSDK'
-
-end

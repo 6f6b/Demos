@@ -7,18 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68BF821D2174948500882207 /* ceshi.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 68BF821C2174948500882207 /* ceshi.mp4 */; };
-		68BF821F2174954B00882207 /* ceshi2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 68BF821E2174954B00882207 /* ceshi2.mp4 */; };
+		6838ADF321D227F300648E63 /* CyclePlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6838ADF121D227F300648E63 /* CyclePlayer.h */; };
+		6838ADF421D227F300648E63 /* CyclePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838ADF221D227F300648E63 /* CyclePlayer.m */; };
+		6838ADF721D23EC300648E63 /* tjsy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6838ADF521D23EC200648E63 /* tjsy.mp3 */; };
+		6838ADF821D23EC300648E63 /* tjsy_no_audio.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6838ADF621D23EC300648E63 /* tjsy_no_audio.mp4 */; };
 		68BF82452174B80000882207 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BF82442174B80000882207 /* MobileCoreServices.framework */; };
 		68BF82472174B80D00882207 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BF82462174B80D00882207 /* SystemConfiguration.framework */; };
 		68BF824821757E9B00882207 /* libPods-PlayerTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3933F261C0659E8AC494FA0F /* libPods-PlayerTest.a */; };
 		68BF824A2175820000882207 /* tjsy.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 68BF8249217581AF00882207 /* tjsy.mp4 */; };
-		68BF824C217583A400882207 /* tjsy1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 68BF824B217583A400882207 /* tjsy1.mp4 */; };
-		68BF824E2175851300882207 /* tjsy2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 68BF824D2175851300882207 /* tjsy2.mp4 */; };
-		68BF82502175877900882207 /* tjsy3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 68BF824F2175877900882207 /* tjsy3.mp4 */; };
-		68BF825421758EA900882207 /* CustomPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 68BF825221758EA900882207 /* CustomPlayer.h */; };
-		68BF825521758EA900882207 /* CustomPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BF825321758EA900882207 /* CustomPlayer.m */; };
-		68BF82572175CEFE00882207 /* 我的影片.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 68BF82562175CEFD00882207 /* 我的影片.mp3 */; };
 		68D195BD2174304500DFBC4F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D195BC2174304500DFBC4F /* AppDelegate.m */; };
 		68D195C02174304500DFBC4F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D195BF2174304500DFBC4F /* ViewController.m */; };
 		68D195C32174304500DFBC4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D195C12174304500DFBC4F /* Main.storyboard */; };
@@ -27,7 +23,6 @@
 		68D195CB2174304700DFBC4F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D195CA2174304700DFBC4F /* main.m */; };
 		68D195D52174304700DFBC4F /* PlayerTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D195D42174304700DFBC4F /* PlayerTestTests.m */; };
 		68D195E02174304700DFBC4F /* PlayerTestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D195DF2174304700DFBC4F /* PlayerTestUITests.m */; };
-		68D195F0217463AA00DFBC4F /* 我的影片2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 68D195EF217463A900DFBC4F /* 我的影片2.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,19 +58,15 @@
 		1E42CDDB13FAEB2988530050 /* Pods-PlayerTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerTest.release.xcconfig"; path = "Target Support Files/Pods-PlayerTest/Pods-PlayerTest.release.xcconfig"; sourceTree = "<group>"; };
 		3933F261C0659E8AC494FA0F /* libPods-PlayerTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlayerTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CCD827D033EA128BA66216C /* Pods-PlayerTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerTest.debug.xcconfig"; path = "Target Support Files/Pods-PlayerTest/Pods-PlayerTest.debug.xcconfig"; sourceTree = "<group>"; };
-		68BF821C2174948500882207 /* ceshi.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ceshi.mp4; sourceTree = "<group>"; };
-		68BF821E2174954B00882207 /* ceshi2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ceshi2.mp4; sourceTree = "<group>"; };
+		6838ADF121D227F300648E63 /* CyclePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyclePlayer.h; sourceTree = "<group>"; };
+		6838ADF221D227F300648E63 /* CyclePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyclePlayer.m; sourceTree = "<group>"; };
+		6838ADF521D23EC200648E63 /* tjsy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tjsy.mp3; sourceTree = "<group>"; };
+		6838ADF621D23EC300648E63 /* tjsy_no_audio.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tjsy_no_audio.mp4; sourceTree = "<group>"; };
 		68BF82402174B7EC00882207 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		68BF82422174B7F700882207 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		68BF82442174B80000882207 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		68BF82462174B80D00882207 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		68BF8249217581AF00882207 /* tjsy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tjsy.mp4; sourceTree = "<group>"; };
-		68BF824B217583A400882207 /* tjsy1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tjsy1.mp4; sourceTree = "<group>"; };
-		68BF824D2175851300882207 /* tjsy2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tjsy2.mp4; sourceTree = "<group>"; };
-		68BF824F2175877900882207 /* tjsy3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tjsy3.mp4; sourceTree = "<group>"; };
-		68BF825221758EA900882207 /* CustomPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPlayer.h; sourceTree = "<group>"; };
-		68BF825321758EA900882207 /* CustomPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPlayer.m; sourceTree = "<group>"; };
-		68BF82562175CEFD00882207 /* 我的影片.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "我的影片.mp3"; sourceTree = "<group>"; };
 		68D195B82174304500DFBC4F /* PlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68D195BB2174304500DFBC4F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		68D195BC2174304500DFBC4F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -92,7 +83,6 @@
 		68D195DB2174304700DFBC4F /* PlayerTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlayerTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68D195DF2174304700DFBC4F /* PlayerTestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerTestUITests.m; sourceTree = "<group>"; };
 		68D195E12174304700DFBC4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		68D195EF217463A900DFBC4F /* 我的影片2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "我的影片2.mp4"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,19 +148,14 @@
 			isa = PBXGroup;
 			children = (
 				68BF8249217581AF00882207 /* tjsy.mp4 */,
-				68BF824D2175851300882207 /* tjsy2.mp4 */,
-				68BF824F2175877900882207 /* tjsy3.mp4 */,
-				68BF824B217583A400882207 /* tjsy1.mp4 */,
-				68D195EF217463A900DFBC4F /* 我的影片2.mp4 */,
-				68BF821C2174948500882207 /* ceshi.mp4 */,
-				68BF821E2174954B00882207 /* ceshi2.mp4 */,
-				68BF82562175CEFD00882207 /* 我的影片.mp3 */,
+				6838ADF621D23EC300648E63 /* tjsy_no_audio.mp4 */,
+				6838ADF521D23EC200648E63 /* tjsy.mp3 */,
 				68D195BB2174304500DFBC4F /* AppDelegate.h */,
 				68D195BC2174304500DFBC4F /* AppDelegate.m */,
 				68D195BE2174304500DFBC4F /* ViewController.h */,
 				68D195BF2174304500DFBC4F /* ViewController.m */,
-				68BF825221758EA900882207 /* CustomPlayer.h */,
-				68BF825321758EA900882207 /* CustomPlayer.m */,
+				6838ADF121D227F300648E63 /* CyclePlayer.h */,
+				6838ADF221D227F300648E63 /* CyclePlayer.m */,
 				68D195C12174304500DFBC4F /* Main.storyboard */,
 				68D195C42174304700DFBC4F /* Assets.xcassets */,
 				68D195C62174304700DFBC4F /* LaunchScreen.storyboard */,
@@ -217,7 +202,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68BF825421758EA900882207 /* CustomPlayer.h in Headers */,
+				6838ADF321D227F300648E63 /* CyclePlayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,16 +315,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				68BF824A2175820000882207 /* tjsy.mp4 in Resources */,
-				68BF821D2174948500882207 /* ceshi.mp4 in Resources */,
-				68BF82572175CEFE00882207 /* 我的影片.mp3 in Resources */,
+				6838ADF721D23EC300648E63 /* tjsy.mp3 in Resources */,
+				6838ADF821D23EC300648E63 /* tjsy_no_audio.mp4 in Resources */,
 				68D195C82174304700DFBC4F /* LaunchScreen.storyboard in Resources */,
-				68BF824C217583A400882207 /* tjsy1.mp4 in Resources */,
-				68D195F0217463AA00DFBC4F /* 我的影片2.mp4 in Resources */,
 				68D195C52174304700DFBC4F /* Assets.xcassets in Resources */,
-				68BF821F2174954B00882207 /* ceshi2.mp4 in Resources */,
-				68BF82502175877900882207 /* tjsy3.mp4 in Resources */,
 				68D195C32174304500DFBC4F /* Main.storyboard in Resources */,
-				68BF824E2175851300882207 /* tjsy2.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,9 +404,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				68D195C02174304500DFBC4F /* ViewController.m in Sources */,
-				68BF825521758EA900882207 /* CustomPlayer.m in Sources */,
 				68D195CB2174304700DFBC4F /* main.m in Sources */,
 				68D195BD2174304500DFBC4F /* AppDelegate.m in Sources */,
+				6838ADF421D227F300648E63 /* CyclePlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,7 +590,7 @@
 					"$(PROJECT_DIR)/PlayerTest/arm（for\\ appstore）",
 				);
 				INFOPLIST_FILE = PlayerTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -640,7 +620,7 @@
 					"$(PROJECT_DIR)/PlayerTest/arm（for\\ appstore）",
 				);
 				INFOPLIST_FILE = PlayerTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

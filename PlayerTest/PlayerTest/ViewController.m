@@ -29,41 +29,24 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.grayColor;
     
-    NSString *mediaPath = [[NSBundle mainBundle] pathForResource:@"tjsy_no_audio" ofType:@"mp4"];
+    NSString *mediaPath = [[NSBundle mainBundle] pathForResource:@"踏步_没音轨" ofType:@"mp4"];
     NSURL *mediaURL = [NSURL fileURLWithPath:mediaPath];
 
-//    self.cyclePlayer = [[CyclePlayer alloc] initWithFrame:CGRectMake(100, 100, 200, 100)];
-//    [self.view addSubview:self.cyclePlayer];
-//    [self.cyclePlayer playWithURL:mediaURL];
-
     self.avPlayer = [AVPlayer playerWithPlayerItem:[AVPlayerItem playerItemWithURL:mediaURL]];
-//    self.avPlayer.muted = TRUE;
     AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.avPlayer];
-    playerLayer.frame = CGRectMake(100, 100, 200, 100);
+    playerLayer.frame = CGRectMake(100, 100, 300, 150);
     [self.view.layer addSublayer:playerLayer];
     [self.avPlayer play];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidPlayToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    {
-        AVPlayer *player = [AVPlayer playerWithPlayerItem:[AVPlayerItem playerItemWithURL:mediaURL]];
-        //    self.avPlayer.muted = TRUE;
-        AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.avPlayer];
-        playerLayer.frame = CGRectMake(100, 100, 200, 100);
-        [self.view.layer addSublayer:playerLayer];
-        [self.avPlayer play];
-    }
 
     
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:mediaURL error:nil];
-    self.audioPlayer.numberOfLoops = 1000;
-    [self.audioPlayer play];
+//    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:mediaURL error:nil];
+//    self.audioPlayer.numberOfLoops = -1;
+//    [self.audioPlayer play];
 }
 
 - (void)playerItemDidPlayToEnd:(NSNotification *)notification{
-    
-    
-    
-        [self rerunPlayVideo];
-    
+    [self rerunPlayVideo];
 }
 
 //视频重播

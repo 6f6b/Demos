@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		6838ADF321D227F300648E63 /* CyclePlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6838ADF121D227F300648E63 /* CyclePlayer.h */; };
 		6838ADF421D227F300648E63 /* CyclePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6838ADF221D227F300648E63 /* CyclePlayer.m */; };
-		6838ADF721D23EC300648E63 /* tjsy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6838ADF521D23EC200648E63 /* tjsy.mp3 */; };
-		6838ADF821D23EC300648E63 /* tjsy_no_audio.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6838ADF621D23EC300648E63 /* tjsy_no_audio.mp4 */; };
+		6838AE4B21D777CA00648E63 /* picc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6838AE4A21D777CA00648E63 /* picc.mp4 */; };
+		6838AE5021D7810A00648E63 /* 踏步_有音轨.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6838AE4E21D7810A00648E63 /* 踏步_有音轨.mp4 */; };
+		6838AE5121D7810A00648E63 /* 踏步_没音轨.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6838AE4F21D7810A00648E63 /* 踏步_没音轨.mp4 */; };
+		6838AE5321D7811F00648E63 /* tjsy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6838AE5221D7811F00648E63 /* tjsy.mp3 */; };
 		68BF82452174B80000882207 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BF82442174B80000882207 /* MobileCoreServices.framework */; };
 		68BF82472174B80D00882207 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BF82462174B80D00882207 /* SystemConfiguration.framework */; };
 		68BF824821757E9B00882207 /* libPods-PlayerTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3933F261C0659E8AC494FA0F /* libPods-PlayerTest.a */; };
@@ -60,8 +62,10 @@
 		3CCD827D033EA128BA66216C /* Pods-PlayerTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerTest.debug.xcconfig"; path = "Target Support Files/Pods-PlayerTest/Pods-PlayerTest.debug.xcconfig"; sourceTree = "<group>"; };
 		6838ADF121D227F300648E63 /* CyclePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyclePlayer.h; sourceTree = "<group>"; };
 		6838ADF221D227F300648E63 /* CyclePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyclePlayer.m; sourceTree = "<group>"; };
-		6838ADF521D23EC200648E63 /* tjsy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tjsy.mp3; sourceTree = "<group>"; };
-		6838ADF621D23EC300648E63 /* tjsy_no_audio.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tjsy_no_audio.mp4; sourceTree = "<group>"; };
+		6838AE4A21D777CA00648E63 /* picc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = picc.mp4; sourceTree = "<group>"; };
+		6838AE4E21D7810A00648E63 /* 踏步_有音轨.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "踏步_有音轨.mp4"; sourceTree = "<group>"; };
+		6838AE4F21D7810A00648E63 /* 踏步_没音轨.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "踏步_没音轨.mp4"; sourceTree = "<group>"; };
+		6838AE5221D7811F00648E63 /* tjsy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tjsy.mp3; sourceTree = "<group>"; };
 		68BF82402174B7EC00882207 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		68BF82422174B7F700882207 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		68BF82442174B80000882207 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -148,8 +152,10 @@
 			isa = PBXGroup;
 			children = (
 				68BF8249217581AF00882207 /* tjsy.mp4 */,
-				6838ADF621D23EC300648E63 /* tjsy_no_audio.mp4 */,
-				6838ADF521D23EC200648E63 /* tjsy.mp3 */,
+				6838AE4A21D777CA00648E63 /* picc.mp4 */,
+				6838AE4F21D7810A00648E63 /* 踏步_没音轨.mp4 */,
+				6838AE4E21D7810A00648E63 /* 踏步_有音轨.mp4 */,
+				6838AE5221D7811F00648E63 /* tjsy.mp3 */,
 				68D195BB2174304500DFBC4F /* AppDelegate.h */,
 				68D195BC2174304500DFBC4F /* AppDelegate.m */,
 				68D195BE2174304500DFBC4F /* ViewController.h */,
@@ -314,11 +320,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6838AE5321D7811F00648E63 /* tjsy.mp3 in Resources */,
 				68BF824A2175820000882207 /* tjsy.mp4 in Resources */,
-				6838ADF721D23EC300648E63 /* tjsy.mp3 in Resources */,
-				6838ADF821D23EC300648E63 /* tjsy_no_audio.mp4 in Resources */,
 				68D195C82174304700DFBC4F /* LaunchScreen.storyboard in Resources */,
+				6838AE5121D7810A00648E63 /* 踏步_没音轨.mp4 in Resources */,
+				6838AE5021D7810A00648E63 /* 踏步_有音轨.mp4 in Resources */,
 				68D195C52174304700DFBC4F /* Assets.xcassets in Resources */,
+				6838AE4B21D777CA00648E63 /* picc.mp4 in Resources */,
 				68D195C32174304500DFBC4F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

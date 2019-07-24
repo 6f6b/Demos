@@ -18,9 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window.rootViewController = [MainController new];
-//    UIWindow *window = [UIWindow new];
-//    [window makeKeyAndVisible];
-//    [UIApplication sharedApplication].keyWindow.rootViewController = [MainController new];
     return YES;
 }
 

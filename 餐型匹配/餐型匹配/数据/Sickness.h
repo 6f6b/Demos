@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //疾病名
 @property (nonatomic,copy)    NSString                 *name;
+
 //疾病ID
 @property (nonatomic,assign)  NSUInteger                ID;
 

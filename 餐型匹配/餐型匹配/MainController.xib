@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,6 @@
                 <outlet property="bottomConstriant" destination="sYm-jW-fgc" id="c9E-A1-ZKw"/>
                 <outlet property="collectionView" destination="EpF-hi-3bj" id="Zyd-DK-gZK"/>
                 <outlet property="foodType" destination="klM-po-3ao" id="teG-ah-Gxp"/>
-                <outlet property="pickerContainView" destination="bXm-aG-RWd" id="LIu-1S-R5N"/>
                 <outlet property="pickerView" destination="zV7-Le-pe5" id="bFF-y7-ric"/>
                 <outlet property="proteinType" destination="DgU-sb-41w" id="HAc-6M-52K"/>
                 <outlet property="riceType" destination="yL5-iJ-QPk" id="uja-Ni-yLE"/>
@@ -33,7 +32,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ddk-Gq-L9u">
                         <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="headerReferenceSize" width="50" height="50"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
@@ -136,7 +135,6 @@
                 <constraint firstItem="XSO-fK-luK" firstAttribute="top" secondItem="gLU-7s-huS" secondAttribute="bottom" constant="1" id="AOi-Ty-wip"/>
                 <constraint firstItem="xWD-DC-Nvk" firstAttribute="width" secondItem="kCk-7Z-q6V" secondAttribute="width" id="CoR-mU-BKR"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="xWD-DC-Nvk" secondAttribute="trailing" id="KIm-4e-eKi"/>
-                <constraint firstItem="bXm-aG-RWd" firstAttribute="top" secondItem="XSO-fK-luK" secondAttribute="bottom" id="LOM-nE-bPj"/>
                 <constraint firstItem="EpF-hi-3bj" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="NGN-ZV-j8K"/>
                 <constraint firstItem="EpF-hi-3bj" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="U2z-zi-Eb6"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="EpF-hi-3bj" secondAttribute="trailing" id="UPO-ho-OaY"/>
@@ -144,6 +142,7 @@
                 <constraint firstItem="gLU-7s-huS" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="YKu-nn-aAd"/>
                 <constraint firstItem="kCk-7Z-q6V" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="ZtR-Cl-ezL"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="EpF-hi-3bj" secondAttribute="bottom" constant="300" id="avt-7H-abb"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="XSO-fK-luK" secondAttribute="bottom" id="fLa-WJ-n5n"/>
                 <constraint firstItem="kCk-7Z-q6V" firstAttribute="top" secondItem="EpF-hi-3bj" secondAttribute="bottom" id="l6g-bA-TuG"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="gLU-7s-huS" secondAttribute="trailing" id="sHK-pV-Naj"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="bXm-aG-RWd" secondAttribute="bottom" constant="-300" id="sYm-jW-fgc"/>

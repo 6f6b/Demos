@@ -12,8 +12,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DataBase : NSObject
-@property (nonatomic,readonly) NSArray *sicknesses;
-@property (nonatomic,readonly) NSArray *conditionTables;
++ (instancetype)shareinstance;
+
+@property (nonatomic,strong) NSArray *sicknessTable;
+@property (nonatomic,strong) NSArray *conditionTable;
+
 @end
 
 NS_ASSUME_NONNULL_END

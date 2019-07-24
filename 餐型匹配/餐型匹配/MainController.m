@@ -7,10 +7,12 @@
 //
 
 #import "MainController.h"
+
 #import "CollectionViewCell.h"
 #import "DataBase.h"
 #import "Sickness.h"
 #import "Condition.h"
+#import "CollectionHeaderView.h"
 
 @interface PickerModel : NSObject
 @property (nonatomic,copy) NSString *title;
@@ -48,7 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    NSArray *sickNames = [DataBase new].sicknesses;
+    NSArray *sickNames = [DataBase shareinstance].sicknessTable;
     NSMutableArray *arr = [NSMutableArray new];
     for (NSArray *sicks in sickNames) {
         NSMutableArray *subArr = [NSMutableArray new];
@@ -61,9 +63,12 @@
         [arr addObject:subArr];
     }
     self.dataArray = arr;
+    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+//    self.collectionView.
     [self.collectionView registerNib:[UINib nibWithNibName:@"CollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"CollectionViewCell"];
+    [self.collectionView registerClass:[CollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CollectionHeaderView"];
     [self.collectionView reloadData];
     
     self.pickerView.delegate = self;
@@ -95,10 +100,9 @@
 #pragma mark - 计算逻辑
 
 - (Condition *)generateMealWith:(NSArray<Sickness *> *)sicknesses age:(NSUInteger)age specialSelection:(SpecialSelection)specialSelection{
-    //第一遍筛选
+    //第一遍条件筛选
     NSMutableArray *firstSelections = [NSMutableArray new];
-    NSMutableSet *set = [[NSMutableSet alloc] init];
-    NSArray *conditions = [DataBase new].conditionTables;
+    NSArray *conditions = [DataBase shareinstance].conditionTable;
     for (Sickness *sickness in sicknesses) {
         for (Condition *condition in conditions) {
             if (condition.sickness.name != sickness.name) {
@@ -110,10 +114,6 @@
             if (condition.specialSelection != SpecialSelectionNone && condition.specialSelection != specialSelection) {
                 continue;
             }
-            //            if ([set containsObject:@(meal.ID)]) {
-            //                continue;
-            //            }
-            //            [set addObject:@(meal.ID)];
             [firstSelections addObject:condition];
         }
     }
@@ -123,6 +123,7 @@
     
     NSArray *secondSelections;
     
+    //根据优先级排序筛选
     secondSelections = [self filterMealsByFoodTypeWith:firstSelections];
     if (secondSelections.count <= 1) {
         return secondSelections.firstObject;
@@ -146,13 +147,13 @@
     FoodType priorityFirst = MAXFLOAT;
     for (Condition *condition in conditions) {
         Meal *meal = condition.meal;
-        if (meal.foodType < priorityFirst) {
-            priorityFirst = meal.foodType;
+        if (meal.food.priority < priorityFirst) {
+            priorityFirst = meal.food.priority;
         }
     }
     for (Condition *condition in conditions) {
         Meal *meal = condition.meal;
-        if (meal.foodType == priorityFirst) {
+        if (meal.food.priority == priorityFirst) {
             [arr addObject:condition];
         }
     }
@@ -164,13 +165,13 @@
     ProteinType priorityFirst = MAXFLOAT;
     for (Condition *condition in conditions) {
         Meal *meal = condition.meal;
-        if (meal.foodType < priorityFirst) {
-            priorityFirst = meal.priority;
+        if (meal.food.priority < priorityFirst) {
+            priorityFirst = meal.food.priority;
         }
     }
     for (Condition *condition in conditions) {
         Meal *meal = condition.meal;
-        if (meal.priority == priorityFirst) {
+        if (meal.food.priority == priorityFirst) {
             [arr addObject:condition];
         }
     }
@@ -191,7 +192,7 @@
     NSString *proteinMessage;
     NSString *riceMessage;
     NSString *foodMessage;
-    switch (meal.proteinType) {
+    switch (meal.protein.proteinType) {
         case ProteinTypeNone:
             proteinMessage = @"无蛋白匹配";
             break;
@@ -208,7 +209,7 @@
             proteinMessage = @"无蛋白匹配";
             break;
     }
-    switch (meal.riceType) {
+    switch (meal.rice.riceType) {
         case RiceTypeNone:
             riceMessage = @"无米饭匹配";
             break;
@@ -225,7 +226,7 @@
             riceMessage = @"无米饭匹配";
             break;
     }
-    switch (meal.foodType) {
+    switch (meal.food.foodType) {
         case FoodTypeNone:
             foodMessage = @"无食物匹配";
             break;
@@ -294,6 +295,15 @@
     return cell;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        CollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CollectionHeaderView" forIndexPath:indexPath];
+        headerView.frame = CGRectMake(0, 0, 500, 30);
+        headerView.backgroundColor = [UIColor redColor];
+        return headerView;
+    }
+    return [UICollectionReusableView new];
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     Sickness *sick = self.dataArray[indexPath.section][indexPath.row];

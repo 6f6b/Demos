@@ -66,7 +66,6 @@
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-//    self.collectionView.
     [self.collectionView registerNib:[UINib nibWithNibName:@"CollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"CollectionViewCell"];
     [self.collectionView registerClass:[CollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CollectionHeaderView"];
     [self.collectionView reloadData];
@@ -97,9 +96,9 @@
         self.ageArray = arr;
     }
 }
-#pragma mark - 计算逻辑
 
-- (Condition *)generateMealWith:(NSArray<Sickness *> *)sicknesses age:(NSUInteger)age specialSelection:(SpecialSelection)specialSelection{
+#pragma mark - 计算逻辑
+- (Meal *)generateMealWith:(NSArray<Sickness *> *)sicknesses age:(NSUInteger)age specialSelection:(SpecialSelection)specialSelection{
     //第一遍条件筛选
     NSMutableArray *firstSelections = [NSMutableArray new];
     NSArray *conditions = [DataBase shareinstance].conditionTable;
@@ -118,74 +117,44 @@
         }
     }
     if (firstSelections.count <= 1) {
-        return firstSelections.firstObject;
+        Condition *condition = firstSelections.firstObject;
+        return condition.meal;
     }
-    
-    NSArray *secondSelections;
-    
-    //根据优先级排序筛选
-    secondSelections = [self filterMealsByFoodTypeWith:firstSelections];
-    if (secondSelections.count <= 1) {
-        return secondSelections.firstObject;
-    }
-    
-    secondSelections = [self filterMealsByProteinWith:secondSelections];
-    if (secondSelections.count <= 1) {
-        return secondSelections.firstObject;
-    }
-    
-    secondSelections = [self filterMealsBySpecialSelectionWith:secondSelections];
-    if (secondSelections.count) {
-        return secondSelections.firstObject;
-    }
-    
-    return nil;
-}
 
-- (NSArray *)filterMealsByFoodTypeWith:(NSArray *)conditions{
-    NSMutableArray *arr = [NSMutableArray new];
-    FoodType priorityFirst = MAXFLOAT;
-    for (Condition *condition in conditions) {
-        Meal *meal = condition.meal;
-        if (meal.food.priority < priorityFirst) {
-            priorityFirst = meal.food.priority;
+    Meal *meal = [Meal new];
+    Condition *firstCondition = firstSelections.firstObject;
+    
+    //筛选食物
+    Food *food = firstCondition.meal.food;
+    for (int i=0; i<firstSelections.count; i++) {
+        Condition *con = firstSelections[i];
+        if (food.priority > con.meal.food.priority) {
+            food = con.meal.food;
         }
     }
-    for (Condition *condition in conditions) {
-        Meal *meal = condition.meal;
-        if (meal.food.priority == priorityFirst) {
-            [arr addObject:condition];
+    meal.food = food;
+    
+    //筛选蛋白
+    Protein *protein = firstCondition.meal.protein;
+    for (int i=0; i<firstSelections.count; i++) {
+        Condition *con = firstSelections[i];
+        if (protein.priority > con.meal.protein.priority) {
+            protein = con.meal.protein;
         }
     }
-    return arr;
-}
-
-- (NSArray *)filterMealsByProteinWith:(NSArray *)conditions{
-    NSMutableArray *arr = [NSMutableArray new];
-    ProteinType priorityFirst = MAXFLOAT;
-    for (Condition *condition in conditions) {
-        Meal *meal = condition.meal;
-        if (meal.food.priority < priorityFirst) {
-            priorityFirst = meal.food.priority;
+    meal.protein = protein;
+    
+    //筛选米饭
+    Rice *rice = firstCondition.meal.rice;
+    for (int i=0; i<firstSelections.count; i++) {
+        Condition *con = firstSelections[i];
+        if (rice.priority > con.meal.rice.priority) {
+            rice = con.meal.rice;
         }
     }
-    for (Condition *condition in conditions) {
-        Meal *meal = condition.meal;
-        if (meal.food.priority == priorityFirst) {
-            [arr addObject:condition];
-        }
-    }
-    return arr;
-}
-
-- (NSArray *)filterMealsBySpecialSelectionWith:(NSArray *)conditions{
-    return conditions;
-    //    for (Condition *condition in meals) {
-    //        if (meal.specialSelection != ) {
-    //            priorityFirst = meal.priority;
-    //        }
-    //    }
-    //    return nil;
+    meal.rice = rice;
+    
+    return meal;
 }
 
 - (void)showMealWith:(Meal *)meal{
@@ -370,7 +339,7 @@
             }
         }
     }
-    Condition *condition = [self generateMealWith:sicks age:self.ageModel.value specialSelection:self.specialModel.value];
-    [self showMealWith:condition.meal];
+    Meal *meal = [self generateMealWith:sicks age:self.ageModel.value specialSelection:self.specialModel.value];
+    [self showMealWith:meal];
 }
 @end

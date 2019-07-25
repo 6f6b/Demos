@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) Food           *food;
 
 //Meal ID
-@property (nonatomic,assign) int         ID;
+@property (nonatomic,assign) NSUInteger     ID;
 @end
 
 NS_ASSUME_NONNULL_END

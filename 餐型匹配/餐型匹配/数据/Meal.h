@@ -10,20 +10,11 @@
 #import "AgeSection.h"
 #import "Sickness.h"
 
-#import "Food.h"
-#import "Protein.h"
-#import "Rice.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Meal : NSObject
 
-//蛋白类型
-@property (nonatomic,strong) Protein        *protein;
-//米饭类型
-@property (nonatomic,strong) Rice           *rice;
-//食物类型
-@property (nonatomic,strong) Food           *food;
+@property (nonatomic,strong) NSArray *components;
 
 //Meal ID
 @property (nonatomic,assign) NSUInteger     ID;

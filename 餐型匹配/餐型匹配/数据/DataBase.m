@@ -9,9 +9,7 @@
 #import "DataBase.h"
 #import "Condition.h"
 
-#import "Food.h"
-#import "Protein.h"
-#import "Rice.h"
+#import "Component.h"
 
 #define Priority_0 0
 #define Priority_1 1
@@ -31,8 +29,7 @@
     dispatch_once(&onceToken, ^{
         _sharedSingleton = [[super allocWithZone:NULL] init];
         _sharedSingleton.idNum = 0;
-        [_sharedSingleton createSicknesses];
-        [_sharedSingleton createConditions];
+        [_sharedSingleton initialData];
     });
     return _sharedSingleton;
 }
@@ -44,63 +41,104 @@
     return meal;
 }
 
-- (void)createConditions{
+- (void)initialData{
+    [self createSicknesses];
+    
     NSMutableArray *conditionTables = [NSMutableArray new];
+    
+    /*组件类型*/
+    ComponentType *componentTypeFood = [ComponentType new];    //食物
+    componentTypeFood.desc = @"食物";
+    componentTypeFood.priority = Priority_0;
+    
+    ComponentType *componentTypeProtein = [ComponentType new]; //蛋白质
+    componentTypeProtein.desc = @"蛋白质";
+    componentTypeProtein.priority = Priority_1;
+    
+    ComponentType *componentTypeRice = [ComponentType new];     //米饭
+    componentTypeRice.desc = @"米饭";
+    componentTypeRice.priority = Priority_2;
+    
+    self.componentTypeTable = @[componentTypeFood,componentTypeProtein,componentTypeRice];
     /*食物*/
-    Food *foodNone = [Food new];
-    foodNone.foodType = FoodTypeNone;
+    
+    Component *foodNone = [Component new];
+    foodNone.componentType = componentTypeFood;
+    foodNone.desc = @"无食物";
     foodNone.priority = Priority_0;
     
-    Food *foodLiquid = [Food new];
-    foodLiquid.foodType = FoodTypeLiquid;
+    Component *foodLiquid = [Component new];
+    foodLiquid.componentType = componentTypeFood;
+    foodLiquid.desc = @"流食";
     foodLiquid.priority = Priority_1;
     
-    Food *foodSemiliquid = [Food new];
-    foodSemiliquid.foodType = FoodTypeSemiliquid;
+    Component *foodSemiliquid = [Component new];
+    foodSemiliquid.componentType = componentTypeFood;
+    foodSemiliquid.desc = @"半流食";
     foodSemiliquid.priority = Priority_2;
     
-    Food *foodPap = [Food new];
-    foodPap.foodType = FoodTypePap;
+    Component *foodPap = [Component new];
+    foodPap.componentType = componentTypeFood;
+    foodPap.desc = @"软食";
     foodPap.priority = Priority_3;
     
-    Food *foodNormal = [Food new];
-    foodNormal.foodType = FoodTypeNormal;
+    Component *foodNormal = [Component new];
+    foodNormal.componentType = componentTypeFood;
+    foodNormal.desc = @"普食";
     foodNormal.priority = Priority_4;
     
     /*蛋白质*/
-    Protein *proteinNone = [Protein new];
-    proteinNone.proteinType = ProteinTypeNone;
+    Component *proteinNone = [Component new];
+    proteinNone.componentType = componentTypeProtein;
+    proteinNone.desc = @"无蛋白质";
     proteinNone.priority = Priority_0;
     
-    Protein *proteinLow = [Protein new];
-    proteinLow.proteinType = ProteinTypeLow;
+    Component *proteinLow = [Component new];
+    proteinLow.componentType = componentTypeProtein;
+    proteinLow.desc = @"低蛋白";
     proteinLow.priority = Priority_1;
     
-    Protein *proteinHigh = [Protein new];
-    proteinHigh.proteinType = ProteinTypeHigh;
+    Component *proteinHigh = [Component new];
+    proteinHigh.componentType = componentTypeProtein;
+    proteinHigh.desc = @"高蛋白";
     proteinHigh.priority = Priority_2;
     
-    Protein *proteinGeneral = [Protein new];
-    proteinGeneral.proteinType = ProteinTypeGeneral;
+    Component *proteinGeneral = [Component new];
+    proteinGeneral.componentType = componentTypeProtein;
+    proteinGeneral.desc = @"普通蛋白";
     proteinGeneral.priority = Priority_3;
     
     /*米饭*/
-    Rice *riceNone = [Rice new];
-    riceNone.riceType = RiceTypeNone;
+    Component *riceNone = [Component new];
+    riceNone.componentType = componentTypeRice;
+    riceNone.desc = @"无米饭";
     riceNone.priority = Priority_0;
     
-    Rice *riceLowProtein = [Rice new];
-    riceLowProtein.riceType = RiceTypeLowProtein;
+    Component *riceLowProtein = [Component new];
+    riceLowProtein.componentType = componentTypeRice;
+    riceLowProtein.desc = @"低蛋白米饭";
     riceLowProtein.priority = Priority_1;
     
-    Rice *riceGeneral = [Rice new];
-    riceGeneral.riceType = RiceTypeGeneral;
+    Component *riceGeneral = [Component new];
+    riceGeneral.componentType = componentTypeRice;
+    riceGeneral.desc = @"白米饭";
     riceGeneral.priority = Priority_2;
     
-    Rice *riceCoarse = [Rice new];
-    riceCoarse.riceType = RiceTypeCoarse;
+    Component *riceCoarse = [Component new];
+    riceCoarse.componentType = componentTypeRice;
+    riceCoarse.desc = @"杂粮饭";
     riceCoarse.priority = Priority_3;
     
+    
+    //特殊选择
+    SpecialSelection *specialSelectionNone = [SpecialSelection new];
+    specialSelectionNone.selectionType = SpecialSelectionTypeNone;
+    specialSelectionNone.selectionName = @"无选择";
+    
+    SpecialSelection *specialSelectionPillowRice = [SpecialSelection new];
+    specialSelectionPillowRice.selectionType = SpecialSelectionTypePillowyRice;
+    specialSelectionPillowRice.selectionName = @"软米饭";
+
     //餐型1：不可匹配、蛋白类型：不可匹配、米饭类型：不可匹配
     for (NSString *sickName in self.sicknessTable[0]) {
         AgeSection *ageSection = [AgeSection new];
@@ -113,14 +151,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodNone;
-        meal.protein = proteinNone;
-        meal.rice = riceNone;
+        meal.components = @[foodNone,proteinNone,riceNone];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -136,14 +173,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodLiquid;
-        meal.protein = proteinNone;
-        meal.rice = riceNone;
+        meal.components = @[foodLiquid,proteinNone,riceNone];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -159,14 +195,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodSemiliquid;
-        meal.protein = proteinNone;
-        meal.rice = riceNone;
+        meal.components = @[foodSemiliquid,proteinNone,riceNone];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -182,14 +217,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodPap;
-        meal.protein = proteinLow;
-        meal.rice = riceLowProtein;
+        meal.components = @[foodPap,proteinLow,riceLowProtein];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -205,14 +239,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodPap;
-        meal.protein = proteinGeneral;
-        meal.rice = riceGeneral;
+        meal.components = @[foodPap,proteinGeneral,riceGeneral];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -228,14 +261,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodPap;
-        meal.protein = proteinGeneral;
-        meal.rice = riceGeneral;
+        meal.components = @[foodPap,proteinGeneral,riceGeneral];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -251,14 +283,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodPap;
-        meal.protein = proteinHigh;
-        meal.rice = riceGeneral;
+        meal.components = @[foodPap,proteinHigh,riceGeneral];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -274,14 +305,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodNormal;
-        meal.protein = proteinLow;
-        meal.rice = riceLowProtein;
+        meal.components = @[foodNormal,proteinLow,riceLowProtein];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -297,15 +327,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodNormal;
-        meal.protein = proteinGeneral;
-        meal.rice = riceGeneral;
+        meal.components = @[foodNormal,proteinGeneral,riceGeneral];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
-        condition.specialSelection = SpecialSelectionPillowyRice;
+        condition.specialSelection = specialSelectionPillowRice;
         [conditionTables addObject:condition];
     }
     
@@ -321,14 +349,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodNormal;
-        meal.protein = proteinGeneral;
-        meal.rice = riceCoarse;
+        meal.components = @[foodNormal,proteinGeneral,riceCoarse];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
     }
     
@@ -344,15 +371,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodNormal;
-        meal.protein = proteinHigh;
-        meal.rice = riceGeneral;
+        meal.components = @[foodNormal,proteinHigh,riceGeneral];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
-        condition.specialSelection = SpecialSelectionPillowyRice;
+        condition.specialSelection = specialSelectionPillowRice;
         [conditionTables addObject:condition];
     }
     
@@ -368,14 +393,13 @@
         sickness.name = sickName;
         
         Meal *meal = [self createAMeal];
-        meal.food = foodNormal;
-        meal.protein = proteinHigh;
-        meal.rice = riceCoarse;
+        meal.components = @[foodNormal,proteinHigh,riceCoarse];
         
         Condition *condition = [Condition new];
         condition.ageSection = ageSection;
         condition.sickness = sickness;
         condition.meal = meal;
+        condition.specialSelection = specialSelectionNone;
         [conditionTables addObject:condition];
         condition.meal = meal;
     }

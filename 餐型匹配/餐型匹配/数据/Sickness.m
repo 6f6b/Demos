@@ -9,5 +9,10 @@
 #import "Sickness.h"
 
 @implementation Sickness
-
+//- (instancetype)init{
+//    if (self = [super init]) {
+//        self.selected = YES;
+//    }
+//    return self;
+//}
 @end

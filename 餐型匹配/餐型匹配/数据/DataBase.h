@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSArray *sicknessTable;
 @property (nonatomic,strong) NSArray *conditionTable;
+@property (nonatomic,strong) NSArray *componentTypeTable;
 
 @end
 

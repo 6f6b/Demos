@@ -19,14 +19,14 @@
 		0341897822E29D9500883E7F /* AgeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341897722E29D9500883E7F /* AgeSection.m */; };
 		0341897B22E2C8D500883E7F /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341897A22E2C8D500883E7F /* DataBase.m */; };
 		0341897E22E45D9300883E7F /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341897D22E45D9300883E7F /* Condition.m */; };
-		0341898122E87B8500883E7F /* Food.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341898022E87B8500883E7F /* Food.m */; };
-		0341898422E87B9000883E7F /* Rice.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341898322E87B9000883E7F /* Rice.m */; };
-		0341898722E87BB700883E7F /* Protein.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341898622E87BB700883E7F /* Protein.m */; };
 		0341898B22E8921F00883E7F /* CollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341898A22E8921F00883E7F /* CollectionHeaderView.m */; };
 		0365E40522E818FF0075CA80 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0365E40322E818FF0075CA80 /* MainController.m */; };
 		0365E40622E818FF0075CA80 /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0365E40422E818FF0075CA80 /* MainController.xib */; };
 		0365E40A22E819390075CA80 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0365E40822E819390075CA80 /* CollectionViewCell.m */; };
 		0365E40B22E819390075CA80 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0365E40922E819390075CA80 /* CollectionViewCell.xib */; };
+		0365E41D22E970710075CA80 /* ComponentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 0365E41C22E970710075CA80 /* ComponentType.m */; };
+		0365E42022E9711F0075CA80 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 0365E41F22E9711F0075CA80 /* Component.m */; };
+		0365E42322E971BF0075CA80 /* SpecialSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0365E42222E971BF0075CA80 /* SpecialSelection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,12 +71,6 @@
 		0341897A22E2C8D500883E7F /* DataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
 		0341897C22E45D9300883E7F /* Condition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
 		0341897D22E45D9300883E7F /* Condition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Condition.m; sourceTree = "<group>"; };
-		0341897F22E87B8500883E7F /* Food.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Food.h; sourceTree = "<group>"; };
-		0341898022E87B8500883E7F /* Food.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Food.m; sourceTree = "<group>"; };
-		0341898222E87B9000883E7F /* Rice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rice.h; sourceTree = "<group>"; };
-		0341898322E87B9000883E7F /* Rice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Rice.m; sourceTree = "<group>"; };
-		0341898522E87BB700883E7F /* Protein.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Protein.h; sourceTree = "<group>"; };
-		0341898622E87BB700883E7F /* Protein.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Protein.m; sourceTree = "<group>"; };
 		0341898922E8921F00883E7F /* CollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionHeaderView.h; sourceTree = "<group>"; };
 		0341898A22E8921F00883E7F /* CollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionHeaderView.m; sourceTree = "<group>"; };
 		0365E40222E818FF0075CA80 /* MainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
@@ -85,6 +79,12 @@
 		0365E40722E819390075CA80 /* CollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		0365E40822E819390075CA80 /* CollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		0365E40922E819390075CA80 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		0365E41B22E970710075CA80 /* ComponentType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentType.h; sourceTree = "<group>"; };
+		0365E41C22E970710075CA80 /* ComponentType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComponentType.m; sourceTree = "<group>"; };
+		0365E41E22E9711F0075CA80 /* Component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
+		0365E41F22E9711F0075CA80 /* Component.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Component.m; sourceTree = "<group>"; };
+		0365E42122E971BF0075CA80 /* SpecialSelection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpecialSelection.h; sourceTree = "<group>"; };
+		0365E42222E971BF0075CA80 /* SpecialSelection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpecialSelection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,18 +180,18 @@
 				0341897A22E2C8D500883E7F /* DataBase.m */,
 				0341896A22E2002D00883E7F /* Meal.h */,
 				0341896B22E2002D00883E7F /* Meal.m */,
-				0341897F22E87B8500883E7F /* Food.h */,
-				0341898022E87B8500883E7F /* Food.m */,
-				0341898222E87B9000883E7F /* Rice.h */,
-				0341898322E87B9000883E7F /* Rice.m */,
-				0341898522E87BB700883E7F /* Protein.h */,
-				0341898622E87BB700883E7F /* Protein.m */,
+				0365E41B22E970710075CA80 /* ComponentType.h */,
+				0365E41C22E970710075CA80 /* ComponentType.m */,
+				0365E41E22E9711F0075CA80 /* Component.h */,
+				0365E41F22E9711F0075CA80 /* Component.m */,
 				0341897C22E45D9300883E7F /* Condition.h */,
 				0341897D22E45D9300883E7F /* Condition.m */,
 				0341896D22E292A100883E7F /* Sickness.h */,
 				0341896E22E292A100883E7F /* Sickness.m */,
 				0341897622E29D9500883E7F /* AgeSection.h */,
 				0341897722E29D9500883E7F /* AgeSection.m */,
+				0365E42122E971BF0075CA80 /* SpecialSelection.h */,
+				0365E42222E971BF0075CA80 /* SpecialSelection.m */,
 			);
 			path = "数据";
 			sourceTree = "<group>";
@@ -330,17 +330,17 @@
 			files = (
 				0341898B22E8921F00883E7F /* CollectionHeaderView.m in Sources */,
 				0341896C22E2002D00883E7F /* Meal.m in Sources */,
-				0341898422E87B9000883E7F /* Rice.m in Sources */,
 				0365E40522E818FF0075CA80 /* MainController.m in Sources */,
 				0341897B22E2C8D500883E7F /* DataBase.m in Sources */,
 				0341897822E29D9500883E7F /* AgeSection.m in Sources */,
+				0365E42022E9711F0075CA80 /* Component.m in Sources */,
 				0341894822E1FECC00883E7F /* main.m in Sources */,
-				0341898122E87B8500883E7F /* Food.m in Sources */,
 				0365E40A22E819390075CA80 /* CollectionViewCell.m in Sources */,
 				0341897E22E45D9300883E7F /* Condition.m in Sources */,
-				0341898722E87BB700883E7F /* Protein.m in Sources */,
+				0365E41D22E970710075CA80 /* ComponentType.m in Sources */,
 				0341896F22E292A100883E7F /* Sickness.m in Sources */,
 				0341893A22E1FEC900883E7F /* AppDelegate.m in Sources */,
+				0365E42322E971BF0075CA80 /* SpecialSelection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

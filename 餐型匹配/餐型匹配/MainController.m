@@ -7,7 +7,7 @@
 //
 
 #import "MainController.h"
-
+#import "数据/Component.h"
 #import "CollectionViewCell.h"
 #import "DataBase.h"
 #import "Sickness.h"
@@ -16,7 +16,7 @@
 
 @interface PickerModel : NSObject
 @property (nonatomic,copy) NSString *title;
-@property (nonatomic,assign) int value;
+@property (nonatomic,assign) NSInteger value;
 
 @end
 
@@ -29,20 +29,25 @@
 @property (nonatomic,strong) NSArray *dataArray;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomConstriant;
+
 @property (strong, nonatomic) IBOutlet UIButton *ageBtn;
 @property (strong, nonatomic) IBOutlet UIButton *specialSelectBtn;
+@property (strong, nonatomic) IBOutlet UIButton *exTimesBtn;
+@property (strong, nonatomic) IBOutlet UIButton *startBtn;
 
 @property (strong, nonatomic) IBOutlet UILabel *foodType;
-@property (strong, nonatomic) IBOutlet UILabel *proteinType;
-@property (strong, nonatomic) IBOutlet UILabel *riceType;
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
 
 @property (nonatomic,strong) NSArray *ageArray;
 @property (nonatomic,strong) NSArray *specialArray;
+@property (nonatomic,strong) NSArray *exTimesArray;
+
 @property (nonatomic,assign) BOOL isCurrentArrayAge;
 
 @property (nonatomic,strong) PickerModel *ageModel;
 @property (nonatomic,strong) PickerModel *specialModel;
+@property (nonatomic,strong) PickerModel *extimeModel;
+
 @end
 
 @implementation MainController
@@ -76,13 +81,13 @@
     {
         PickerModel *pickModel1 = [PickerModel new];
         pickModel1.title = @"软米饭";
-        pickModel1.value = SpecialSelectionPillowyRice;
+        pickModel1.value = SpecialSelectionTypePillowyRice;
         
         PickerModel *pickModel2 = [PickerModel new];
         pickModel2.title = @"无特殊选择";
-        pickModel2.value = SpecialSelectionNone;
+        pickModel2.value = SpecialSelectionTypeNone;
         
-        self.specialArray = @[pickModel1,pickModel2];
+        self.specialArray = @[pickModel2,pickModel1];
     }
     
     {
@@ -95,10 +100,25 @@
         }
         self.ageArray = arr;
     }
+    {
+        NSMutableArray *arr = [NSMutableArray new];
+        NSArray *timeArr = @[@1,@10,@100,@1000,@10000,@100000];
+        for (int i=0; i<timeArr.count; i++) {
+            PickerModel *pickModel = [PickerModel new];
+            pickModel.title = [NSString stringWithFormat:@"%@次",timeArr[i]];
+            pickModel.value = [timeArr[i] integerValue];
+            [arr addObject:pickModel];
+        }
+        self.exTimesArray = arr;
+    }
+    self.ageModel = self.ageArray[0];
+    self.specialModel = self.specialArray[0];
+    self.extimeModel = self.exTimesArray[0];
+    [self refreshBtn];
 }
 
 #pragma mark - 计算逻辑
-- (Meal *)generateMealWith:(NSArray<Sickness *> *)sicknesses age:(NSUInteger)age specialSelection:(SpecialSelection)specialSelection{
+- (Meal *)generateMealWith:(NSArray<Sickness *> *)sicknesses age:(NSUInteger)age specialSelection:(SpecialSelectionType )specialSelectionType{
     //第一遍条件筛选
     NSMutableArray *firstSelections = [NSMutableArray new];
     NSArray *conditions = [DataBase shareinstance].conditionTable;
@@ -110,7 +130,7 @@
             if (![condition.ageSection ageLocatedWith:age]) {
                 continue;
             }
-            if (condition.specialSelection != SpecialSelectionNone && condition.specialSelection != specialSelection) {
+            if (condition.specialSelection.selectionType != SpecialSelectionTypeNone && condition.specialSelection.selectionType != specialSelectionType) {
                 continue;
             }
             [firstSelections addObject:condition];
@@ -122,108 +142,49 @@
     }
 
     Meal *meal = [Meal new];
-    Condition *firstCondition = firstSelections.firstObject;
     
-    //筛选食物
-    Food *food = firstCondition.meal.food;
-    for (int i=0; i<firstSelections.count; i++) {
-        Condition *con = firstSelections[i];
-        if (food.priority > con.meal.food.priority) {
-            food = con.meal.food;
+    NSArray *componentTypes = [DataBase shareinstance].componentTypeTable;
+    NSMutableArray *finalComponents = [NSMutableArray new];
+    for (ComponentType *componentType in componentTypes) {
+        Component *selectedComponent = nil;
+        for (Condition *condition in firstSelections) {
+            for (Component *component in condition.meal.components) {
+                if (component.componentType.desc == componentType.desc) {
+                    if (!selectedComponent) {
+                        selectedComponent = component;
+                        break;
+                    }
+                    if (component.priority < selectedComponent.priority) {
+                        selectedComponent = component;
+                        break;
+                    }
+                }
+            }
+        }
+        if (selectedComponent) {
+            //NSLog(@"添加组件：%@",selectedComponent.desc);
+            [finalComponents addObject:selectedComponent];
         }
     }
-    meal.food = food;
     
-    //筛选蛋白
-    Protein *protein = firstCondition.meal.protein;
-    for (int i=0; i<firstSelections.count; i++) {
-        Condition *con = firstSelections[i];
-        if (protein.priority > con.meal.protein.priority) {
-            protein = con.meal.protein;
-        }
-    }
-    meal.protein = protein;
-    
-    //筛选米饭
-    Rice *rice = firstCondition.meal.rice;
-    for (int i=0; i<firstSelections.count; i++) {
-        Condition *con = firstSelections[i];
-        if (rice.priority > con.meal.rice.priority) {
-            rice = con.meal.rice;
-        }
-    }
-    meal.rice = rice;
-    
+    meal.components = finalComponents;
     return meal;
 }
 
-- (void)showMealWith:(Meal *)meal{
-    NSString *proteinMessage;
-    NSString *riceMessage;
-    NSString *foodMessage;
-    switch (meal.protein.proteinType) {
-        case ProteinTypeNone:
-            proteinMessage = @"无蛋白匹配";
-            break;
-        case ProteinTypeLow:
-            proteinMessage = @"低蛋白";
-            break;
-        case ProteinTypeGeneral:
-            proteinMessage = @"普通蛋白";
-            break;
-        case ProteinTypeHigh:
-            proteinMessage = @"高蛋白";
-            break;
-        default:
-            proteinMessage = @"无蛋白匹配";
-            break;
+- (void)showMealWith:(Meal *)meal time:(float)time{
+    float avTime = time/self.extimeModel.value;
+    NSString *desc = [NSString stringWithFormat:@"执行：%ld次，总耗时：%f 秒，平均每次耗时：%f 秒\n\n",(long)self.extimeModel.value,time,avTime];
+    
+    for (Component *component in meal.components) {
+        desc = [NSString stringWithFormat:@"%@%@:%@\n",desc,component.componentType.desc,component.desc];
     }
-    switch (meal.rice.riceType) {
-        case RiceTypeNone:
-            riceMessage = @"无米饭匹配";
-            break;
-        case RiceTypeLowProtein:
-            riceMessage = @"低蛋白米饭";
-            break;
-        case RiceTypeCoarse:
-            riceMessage = @"杂粮饭";
-            break;
-        case RiceTypeGeneral:
-            riceMessage = @"白米饭";
-            break;
-        default:
-            riceMessage = @"无米饭匹配";
-            break;
-    }
-    switch (meal.food.foodType) {
-        case FoodTypeNone:
-            foodMessage = @"无食物匹配";
-            break;
-        case FoodTypeLiquid:
-            foodMessage = @"流食";
-            break;
-        case FoodTypeSemiliquid:
-            foodMessage = @"半流食";
-            break;
-        case FoodTypePap:
-            foodMessage = @"软食";
-            break;
-        case FoodTypeNormal:
-            foodMessage = @"普食";
-            break;
-        default:
-            foodMessage = @"无食物匹配";
-            break;
-    }
-    self.foodType.text = [NSString stringWithFormat:@"食物类型：%@",foodMessage];
-    self.proteinType.text = [NSString stringWithFormat:@"蛋白类型：%@",proteinMessage];
-    self.riceType.text = [NSString stringWithFormat:@"米饭类型：%@",riceMessage];
+    self.foodType.text = desc;
 }
 
 #pragma mark - pickerview
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    NSArray *arr = self.isCurrentArrayAge ? self.ageArray : self.specialArray;
+    NSArray *arr = [self pickerViewArray];
     PickerModel *pick = arr[row];
     return pick.title;
 }
@@ -233,17 +194,21 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    NSArray *arr = self.isCurrentArrayAge ? self.ageArray : self.specialArray;
+    NSArray *arr = [self pickerViewArray];
     return arr.count;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    NSArray *arr = self.isCurrentArrayAge ? self.ageArray : self.specialArray;
+    NSArray *arr = [self pickerViewArray];
     PickerModel *pickModel = arr[row];
-    if (self.isCurrentArrayAge) {
+    if (self.ageBtn.isSelected) {
         self.ageModel = pickModel;
-    }else{
+    }
+    else if (self.specialSelectBtn.isSelected) {
         self.specialModel = pickModel;
+    }
+    else if (self.exTimesBtn.isSelected){
+        self.extimeModel = pickModel;
     }
 }
 
@@ -307,13 +272,18 @@
 - (void)refreshBtn{
     NSString *ageTitle = self.ageModel.title ? self.ageModel.title : @"年龄";
     NSString *specialTitle = self.specialModel.title ? self.specialModel.title : @"特殊选择";
+    NSString *exTimeTitle = self.extimeModel.title ? self.extimeModel.title : @"执行次数";
 
     [self.ageBtn setTitle:ageTitle forState:UIControlStateNormal];
     [self.specialSelectBtn setTitle:specialTitle forState:UIControlStateNormal];
+    [self.exTimesBtn setTitle:exTimeTitle forState:UIControlStateNormal];
+
 }
 
 - (IBAction)clickAge:(id)sender {
-    self.isCurrentArrayAge = YES;
+    [self.ageBtn setSelected:YES];
+    [self.specialSelectBtn setSelected:NO];
+    [self.exTimesBtn setSelected:NO];
     [self.pickerView reloadAllComponents];
     [UIView animateWithDuration:0.5 animations:^{
         self.bottomConstriant.constant = 0;
@@ -322,12 +292,39 @@
     
 }
 - (IBAction)clickSpecialBtn:(id)sender {
-    self.isCurrentArrayAge = NO;
+    [self.ageBtn setSelected:NO];
+    [self.specialSelectBtn setSelected:YES];
+    [self.exTimesBtn setSelected:NO];
+
     [self.pickerView reloadAllComponents];
     [UIView animateWithDuration:0.5 animations:^{
         self.bottomConstriant.constant = 0;
         [self.view layoutIfNeeded];
     }];
+}
+- (IBAction)clickExTimesBtn:(id)sender {
+    [self.ageBtn setSelected:NO];
+    [self.specialSelectBtn setSelected:NO];
+    [self.exTimesBtn setSelected:YES];
+    
+    [self.pickerView reloadAllComponents];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.bottomConstriant.constant = 0;
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (NSArray *)pickerViewArray{
+    if (self.ageBtn.selected) {
+        return self.ageArray;
+    }
+    if (self.specialSelectBtn.selected) {
+        return self.specialArray;
+    }
+    if (self.exTimesBtn.selected) {
+        return self.exTimesArray;
+    }
+    return nil;
 }
 
 - (IBAction)clickStart:(id)sender {
@@ -339,7 +336,13 @@
             }
         }
     }
-    Meal *meal = [self generateMealWith:sicks age:self.ageModel.value specialSelection:self.specialModel.value];
-    [self showMealWith:meal];
+    
+    Meal *meal;
+    NSTimeInterval beforeTime = [NSDate date].timeIntervalSince1970;
+    for (int i=0; i<self.extimeModel.value; i++) {
+        meal = [self generateMealWith:sicks age:self.ageModel.value specialSelection:self.specialModel.value];
+    }
+    NSTimeInterval afterTime = [NSDate date].timeIntervalSince1970;
+    [self showMealWith:meal time:afterTime-beforeTime];
 }
 @end

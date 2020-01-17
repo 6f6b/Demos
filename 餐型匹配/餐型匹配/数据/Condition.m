@@ -11,8 +11,7 @@
 @implementation Condition
 - (instancetype)init{
     if (self = [super init]) {
-//        self.ageSection
-        self.specialSelection = SpecialSelectionNone;
+        self.specialSelection = [SpecialSelection new];
     }
     return self;
 }

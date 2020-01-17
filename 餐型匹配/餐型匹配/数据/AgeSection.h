@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 //右边是否闭合
 @property (nonatomic,assign) BOOL           rightClose;
 
+@property (nonatomic,assign) NSUInteger     ID;
+
 - (BOOL)ageLocatedWith:(NSUInteger)age;
 @end
 
